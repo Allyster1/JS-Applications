@@ -1,0 +1,19 @@
+{
+  "name": "03.forecaster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha tests",
+    "start": "serve -l 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "4.3.4",
+    "mocha": "^11.7.1",
+    "playwright-chromium": "1.9.2",
+    "serve": "^14.2.4"
+  }
+}
