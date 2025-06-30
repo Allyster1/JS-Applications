@@ -3,7 +3,7 @@ function solve() {
   const arriveBtn = document.getElementById("arrive");
 
   const infoTextRef = document.querySelector(".info");
-  let current = "depot";
+  let current = "";
   let next = "depot";
 
   let url = `http://localhost:3030/jsonstore/bus/schedule/${next}`;
@@ -15,15 +15,21 @@ function solve() {
       throw Error("Invalid request");
     }
 
-    const data = await response.json();
+    try {
+      const data = await response.json();
 
-    current = data.name;
-    next = data.next;
+      current = data.name;
+      next = data.next;
 
-    infoTextRef.textContent = `Next stop ${data.name}`;
+      infoTextRef.textContent = `Next stop ${data.name}`;
 
-    departBtn.disabled = true;
-    arriveBtn.disabled = false;
+      departBtn.disabled = true;
+      arriveBtn.disabled = false;
+    } catch (error) {
+      infoTextRef.textContent = "error";
+      departBtn.disabled = true;
+      arriveBtn.disabled = true;
+    }
   }
 
   async function arrive() {

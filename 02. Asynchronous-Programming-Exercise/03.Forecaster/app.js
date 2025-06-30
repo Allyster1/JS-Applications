@@ -24,6 +24,7 @@ function attachEvents() {
     currentDayUI.innerHTML = `<div class="label">Current conditions</div>`;
     upcomingDaysUI.innerHTML = `<div class="label">Three-day forecast</div>`;
     forecastUI.style.display = "none";
+    locationRef.value = "";
   }
 
   async function getWeatherData() {
