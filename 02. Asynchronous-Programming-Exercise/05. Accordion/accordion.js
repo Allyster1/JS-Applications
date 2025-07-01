@@ -1,30 +1,57 @@
-function solution() {
-  const showMoreBtn = document.querySelector(".button");
-  const extraInfo = document.querySelector(".extra");
+window.addEventListener("load", loadArticles);
 
-  showMoreBtn.addEventListener("click", getData);
+async function loadArticles() {
+  const mainSection = document.getElementById("main");
 
-  let isShown = false;
+  try {
+    const response = await fetch(
+      "http://localhost:3030/jsonstore/advanced/articles/list"
+    );
+    const data = await response.json();
 
-  async function getData() {
-    const id = showMoreBtn.id;
+    for (const element of data) {
+      const accordion = document.createElement("div");
+      accordion.className = "accordion";
 
-    if (!isShown) {
-      const response = await fetch(
-        `http://localhost:3030/jsonstore/advanced/articles/details/${id}`
-      );
-      const data = await response.json();
+      accordion.innerHTML = `
+        <div class="head">
+          <span>${element.title}</span>
+          <button class="button" id="${element._id}">More</button>
+        </div>
+        <div class="extra">
+          <p></p>
+        </div>
+      `;
 
-      extraInfo.innerHTML = `<p>${data.content}</p>`;
-      extraInfo.style.display = "block";
-      showMoreBtn.textContent = "Less";
-    } else {
-      extraInfo.innerHTML = `<p>Scalable Vector Graphics .....</p>`;
-      extraInfo.style.display = "none";
-      showMoreBtn.textContent = "More";
+      const button = accordion.querySelector("button");
+      const extra = accordion.querySelector(".extra");
+      const p = extra.querySelector("p");
+
+      extra.style.display = "none";
+
+      button.addEventListener("click", async () => {
+        if (button.textContent === "More") {
+          try {
+            const contentResponse = await fetch(
+              `http://localhost:3030/jsonstore/advanced/articles/details/${button.id}`
+            );
+            const contentData = await contentResponse.json();
+
+            p.textContent = contentData.content;
+            extra.style.display = "block";
+            button.textContent = "Less";
+          } catch (error) {
+            console.error("Failed to fetch article content:", error);
+          }
+        } else {
+          extra.style.display = "none";
+          button.textContent = "More";
+        }
+      });
+
+      mainSection.appendChild(accordion);
     }
-
-    isShown = !isShown;
+  } catch (error) {
+    console.error("Failed to fetch article list:", error);
   }
 }
-solution();
