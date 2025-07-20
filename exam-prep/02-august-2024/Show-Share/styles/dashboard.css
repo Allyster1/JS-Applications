@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Odibee+Sans&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Odibee+Sans&display=swap'); */
 
 #shows {
   display: flex;
   align-items: center;
-  justify-content:center ;
+  justify-content: center;
   flex-wrap: wrap;
   margin-top: -50px;
-
 }
- h2 {
+h2 {
   text-align: center;
   font-size: 50px;
   color: rgb(20, 136, 230);
@@ -17,10 +15,10 @@
   margin-top: -74px;
 }
 
-#no-show{
+#no-show {
   margin-top: 20px;
 }
-h3{
+h3 {
   font-size: 22px;
   font-family: "Odibee Sans", sans-serif;
   margin: 0;
@@ -37,24 +35,23 @@ h3{
   height: 65vh;
   padding-bottom: 1rem;
   margin: 10px auto;
-  background-image: repeating-radial-gradient(   
+  background-image: repeating-radial-gradient(
     circle closest-corner at 22% 100px,
     rgba(20, 136, 230, 0.72),
     rgb(20, 136, 230) 50px,
     #9b9a9b 50px,
     #7b787d 100px
-    );
-    border-radius: 15px;
-
+  );
+  border-radius: 15px;
 }
 
 .show img {
-border: 2px solid black;
-width: 23vw;
-height: 30vh;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 2px solid black;
+  width: 23vw;
+  height: 30vh;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.show-info{
+.show-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,12 +85,11 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background: rgb(20, 136, 230);
   color: black;
   text-shadow: none;
-
 }
 .show p {
- width: 25vw;
+  width: 25vw;
   font-size: 18px;
-font-weight: 800;
+  font-weight: 800;
   text-align: center;
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px rgb(62, 62, 61);
@@ -103,11 +99,11 @@ font-weight: 800;
 
 @media (max-width: 1000px) {
   h2 {
-    font-size: 25px; 
+    font-size: 25px;
   }
 
   .show {
-    width: 40%; 
+    width: 40%;
   }
 
   .show-info {
@@ -115,15 +111,15 @@ font-weight: 800;
   }
 
   .details-btn {
-    font-size: 12px; 
+    font-size: 12px;
     width: 50px;
   }
 
   .show p {
-    font-size: 9px; 
+    font-size: 9px;
   }
 
   .show img {
-    height:25vh;
+    height: 25vh;
   }
 }

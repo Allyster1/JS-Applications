@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Odibee+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Odibee+Sans&display=swap'); */
 body {
   background-image: url(../images/bg.png);
   background-size: 100vw;
@@ -24,7 +24,6 @@ nav {
   margin-top: -60px;
 }
 
-
 #logo-img {
   height: 155px;
 }
@@ -39,23 +38,18 @@ nav a {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-
-
-
 header a {
   padding: 0 10px;
   text-decoration: none;
-  
-  
 }
 nav a:hover {
-scale: 1.2;
+  scale: 1.2;
 }
 
 footer {
@@ -73,7 +67,6 @@ footer {
   align-items: center;
   justify-content: center;
 }
-
 
 #home h1 {
   margin-top: 80px;
@@ -94,21 +87,22 @@ footer {
   flex-direction: row;
   margin-top: -40px;
   background-image: repeating-linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.7),
-    rgba(0, 0, 0, 0.7) 50px,
-    rgba(169, 169, 169, 0.7) 50px,
-    rgba(169, 169, 169, 0.7) 100px
-  ),
-  repeating-linear-gradient(
-    45deg,
-    #00000099,
-    #000000 45px,
-    #d3d3d3 45px,
-    #d3d3d3 60px);
- padding: 0;
- height: 73vh;
- border-radius: 5px;
+      45deg,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7) 50px,
+      rgba(169, 169, 169, 0.7) 50px,
+      rgba(169, 169, 169, 0.7) 100px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #00000099,
+      #000000 45px,
+      #d3d3d3 45px,
+      #d3d3d3 60px
+    );
+  padding: 0;
+  height: 73vh;
+  border-radius: 5px;
 }
 
 #home img {

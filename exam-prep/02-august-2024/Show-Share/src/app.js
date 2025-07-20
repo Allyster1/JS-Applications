@@ -17,7 +17,8 @@ import { showSearch } from "./views/search.js";
 
 const logoutRef = document.querySelector('[data-id="logout"]');
 
-logoutRef.addEventListener("click", async () => {
+logoutRef.addEventListener("click", async (e) => {
+  e.preventDefault();
   await logout();
   clearUserData();
   updateNav();

@@ -33,21 +33,25 @@ export async function showAddShow(ctx) {
   async function onCreate(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const newMovie = {
-      title: formData.get("title"),
-      imageUrl: formData.get("image-url"),
-      genre: formData.get("genre"),
-      country: formData.get("country"),
-      details: formData.get("details"),
-    };
+    try {
+      const formData = new FormData(event.target);
+      const newMovie = {
+        title: formData.get("title"),
+        imageUrl: formData.get("image-url"),
+        genre: formData.get("genre"),
+        country: formData.get("country"),
+        details: formData.get("details"),
+      };
 
-    if (Object.values(newMovie).some((x) => !x)) {
-      return alert("All fields are required!");
+      if (Object.values(newMovie).some((x) => !x)) {
+        return alert("All fields are required!");
+      }
+
+      await addMovie(newMovie);
+      event.target.reset();
+      ctx.page.redirect("/dashboard");
+    } catch (error) {
+      alert(error.message);
     }
-
-    await addMovie(newMovie);
-    event.target.reset();
-    ctx.page.redirect("/dashboard");
   }
 }
