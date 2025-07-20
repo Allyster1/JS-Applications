@@ -1,6 +1,8 @@
 import page from "../node_modules/page/page.mjs";
 
 import { addRender } from "./middlewares/render.js";
+import { hasUser } from "./middlewares/guard.js";
+
 import { updateNav } from "./api/userUtility.js";
 
 import { showHome } from "./views/home.js";
@@ -18,13 +20,13 @@ page(addRender);
 page("/", showHome);
 page("/dashboard", showDashboard);
 page("/search", showSearch);
-page("/create", showCreate);
-page("/details", showDetails);
-page("/edit", showEdit);
+page("/create", hasUser, showCreate);
+page("/dashboard/details/:productId", showDetails);
+page("/edit", hasUser, showEdit);
 
 page("/login", showLogin);
 page("/register", showRegister);
-page("/logout", logoutHandler);
+page("/logout", hasUser, logoutHandler);
 
 updateNav();
 
