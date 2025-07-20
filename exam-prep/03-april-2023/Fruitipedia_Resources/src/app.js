@@ -12,6 +12,7 @@ import { showEdit } from "./views/edit.js";
 
 import { showRegister } from "./views/register.js";
 import { showLogin } from "./views/login.js";
+import { logoutHandler } from "./views/logoutHandler.js";
 
 page(addRender);
 page("/", showHome);
@@ -23,7 +24,7 @@ page("/edit", showEdit);
 
 page("/login", showLogin);
 page("/register", showRegister);
-page("/logout", () => console.log("logout"));
+page("/logout", logoutHandler);
 
 updateNav();
 
