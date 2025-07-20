@@ -1,38 +1,32 @@
-import { getUserData } from "../utils/userData.js";
+import { getUserData } from "./userUtility.js";
 
 const hostname = "http://localhost:3030";
 
 async function request(method, url, data) {
-  const userData = getUserData();
-
   const options = {
     method,
     headers: {},
   };
 
-  if (userData?.token) {
-    options.headers["X-Authorization"] = userData.token;
-  }
+  const userData = getUserData();
 
   if (data !== undefined) {
     options.headers["Content-Type"] = "application/json";
     options.body = JSON.stringify(data);
   }
 
+  if (userData) {
+    options.headers["X-Authorization"] = userData.token;
+  }
+
   const response = await fetch(hostname + url, options);
 
   if (!response.ok) {
-    let message = `${response.status} ${response.statusText}`;
-    try {
-      const error = await response.json();
-      if (error?.message) message = error.message;
-    } catch {
-      // using default message
-    }
-    throw new Error(message);
+    const error = await response.json();
+    throw error;
   }
 
-  if (response.status == 204) return;
+  if (response.status == 204) return response;
   return response.json();
 }
 
@@ -52,4 +46,4 @@ function del(url) {
   return request("DELETE", url);
 }
 
-export { get, post, put, del };
+export const api = { get, post, put, del };

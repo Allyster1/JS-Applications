@@ -1,6 +1,7 @@
 import page from "../node_modules/page/page.mjs";
 
 import { addRender } from "./middlewares/render.js";
+import { updateNav } from "./api/userUtility.js";
 
 import { showHome } from "./views/home.js";
 import { showDashboard } from "./views/dashboard.js";
@@ -23,5 +24,7 @@ page("/edit", showEdit);
 page("/login", showLogin);
 page("/register", showRegister);
 page("/logout", () => console.log("logout"));
+
+updateNav();
 
 page.start();
