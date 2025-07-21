@@ -1,4 +1,4 @@
-// import { getUserData } from "./userUtility.js";
+import { getUserData } from "./userUtility.js";
 
 const hostname = "http://localhost:3030";
 
@@ -8,16 +8,16 @@ async function request(method, url, data) {
     headers: {},
   };
 
-  // const userData = getUserData();
+  const userData = getUserData();
 
   if (data !== undefined) {
     options.headers["Content-Type"] = "application/json";
     options.body = JSON.stringify(data);
   }
 
-  // if (userData && userData.token) {
-  //   options.headers["X-Authorization"] = userData.token;
-  // }
+  if (userData && userData.token) {
+    options.headers["X-Authorization"] = userData.token;
+  }
 
   const response = await fetch(hostname + url, options);
 
