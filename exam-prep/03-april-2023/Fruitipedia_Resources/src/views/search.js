@@ -1,34 +1,58 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-const searchTemplate = () => html` <section id="search">
-  <div class="form">
-    <h2>Search</h2>
-    <form class="search-form">
-      <input type="text" name="search" id="search-input" />
-      <button class="button-list">Search</button>
-    </form>
-  </div>
-  <h4>Results:</h4>
-  <div class="search-result">
-    <p class="no-result">No result.</p>
-    <!--If there are matches display a div with information about every fruit-->
-    <div class="fruit">
-      <img src="./images/fruit 1.png" alt="example1" />
-      <h3 class="title">Pineapple</h3>
-      <p class="description">
-        The pineapple is a tropical plant with an edible fruit. It is the most
-        economically significant plant in the family Bromeliaceae.The pineapple
-        is indigenous to South America. Pineapples grow as a small shrub, the
-        individual flowers of the unpollinated plant fuse to form a multiple
-        fruit. The plant is normally propagated from the offset produced at the
-        top of the fruit,or from a side shoot, and typically matures within a
-        year.
-      </p>
-      <a class="details-btn" href="">More Info</a>
-    </div>
-  </div>
-</section>`;
+import { searchProduct } from "../api/dataService.js";
 
-export function showSearch(ctx) {
-  ctx.render(searchTemplate());
+const searchTemplate = (product, onSearch, query = "") => html`
+  <section id="search">
+    <div class="form">
+      <h2>Search</h2>
+      <form class="search-form" @submit=${onSearch}>
+        <input type="text" name="search" id="search-input" .value=${query} />
+        <button class="button-list">Search</button>
+      </form>
+    </div>
+
+    <h4>Results:</h4>
+
+    ${product.length > 0
+      ? html`
+          <div class="search-result">
+            ${product.map(
+              (p) => html`
+                <div class="fruit">
+                  <img src="${p.imageUrl}" alt="${p.name}" />
+                  <h3 class="title">${p.name}</h3>
+                  <p class="description">${p.description}</p>
+                  <a class="details-btn" href="/dashboard/details/${p._id}">
+                    More Info
+                  </a>
+                </div>
+              `
+            )}
+          </div>
+        `
+      : html`<p class="no-result">No result.</p>`}
+  </section>
+`;
+
+export async function showSearch(ctx) {
+  const query = new URLSearchParams(ctx.querystring).get("query")?.trim() || "";
+  const results = query ? await searchProduct(query) : [];
+
+  async function onSearch(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    const formData = new FormData(form);
+    const searchQuery = formData.get("search").trim();
+
+    if (!searchQuery) {
+      alert("The field is required!");
+      return;
+    }
+
+    ctx.page.redirect(`/search?query=${encodeURIComponent(searchQuery)}`);
+  }
+
+  return ctx.render(searchTemplate(results, onSearch, query));
 }

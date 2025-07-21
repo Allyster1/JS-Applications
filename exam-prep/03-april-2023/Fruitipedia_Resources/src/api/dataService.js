@@ -19,3 +19,7 @@ export async function deleteProduct(productId) {
 export async function updateProduct(productId, productData) {
   return api.put("/data/fruits/" + productId, productData);
 }
+
+export async function searchProduct(query) {
+  return api.get(`/data/fruits?where=name%20LIKE%20%22${query}%22`);
+}

@@ -15,7 +15,7 @@ async function request(method, url, data) {
     options.body = JSON.stringify(data);
   }
 
-  if (userData) {
+  if (userData && userData.token) {
     options.headers["X-Authorization"] = userData.token;
   }
 
