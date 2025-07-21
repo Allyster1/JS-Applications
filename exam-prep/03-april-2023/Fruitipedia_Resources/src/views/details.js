@@ -1,41 +1,56 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-const detailsTemplate = () => html`
+import { deleteProduct, getProductById } from "../api/dataService.js";
+import { getUserData } from "../api/userUtility.js";
+
+const detailsTemplate = (product, isOwner, onDelete) => html`
   <section id="details">
     <div id="details-wrapper">
-      <img id="details-img" src="./images/fruit 1.png" alt="example1" />
-      <p id="details-title">Pineapple</p>
+      <img id="details-img" src=${product.imageUrl} alt="example1" />
+      <p id="details-title">${product.name}</p>
       <div id="info-wrapper">
         <div id="details-description">
-          <p>
-            The pineapple is a tropical plant with an edible fruit. It is the
-            most economically significant plant in the family Bromeliaceae.The
-            pineapple is indigenous to South America. Pineapples grow as a small
-            shrub, the individual flowers of the unpollinated plant fuse to form
-            a multiple fruit. The plant is normally propagated from the offset
-            produced at the top of the fruit,or from a side shoot, and typically
-            matures within a year.
-          </p>
+          <p>${product.description}</p>
           <p id="nutrition">Nutrition</p>
-          <p id="details-nutrition">
-            Raw pineapple pulp is 86% water, 13% carbohydrates, 0.5% protein,
-            and contains negligible fat (table). In a 100-gram reference amount,
-            raw pineapple supplies 209 kilojoules (50 kilocalories) of food
-            energy, and is a rich source of manganese (44% Daily Value, DV) and
-            vitamin C (58% DV), but otherwise contains no micronutrients in
-            significant amounts.
-          </p>
+          <p id="details-nutrition">${product.nutrition}</p>
         </div>
         <!--Edit and Delete are only for creator-->
-        <div id="action-buttons">
-          <a href="/edit" id="edit-btn">Edit</a>
-          <a href="/delete" id="delete-btn">Delete</a>
-        </div>
+        ${isOwner
+          ? html` <div id="action-buttons">
+              <a href="/edit/${product._id}" id="edit-btn">Edit</a>
+              <a
+                href="/delete/${product._id}"
+                @click=${onDelete}
+                id="delete-btn"
+                >Delete</a
+              >
+            </div>`
+          : null}
       </div>
     </div>
   </section>
 `;
 
-export function showDetails(ctx) {
-  ctx.render(detailsTemplate());
+export async function showDetails(ctx) {
+  const productId = ctx.params.productId;
+
+  async function onDelete(e) {
+    e.preventDefault();
+    const confirmed = confirm("Are you sure?");
+    if (confirmed) {
+      await deleteProduct(productId);
+      ctx.page.redirect("/dashboard");
+    }
+  }
+
+  try {
+    const userData = getUserData();
+    const product = await getProductById(productId);
+
+    const isOwner = userData && userData._id == product._ownerId;
+
+    return ctx.render(detailsTemplate(product, isOwner, onDelete));
+  } catch (error) {
+    return alert(error.message);
+  }
 }

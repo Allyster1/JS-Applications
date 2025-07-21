@@ -16,7 +16,7 @@ const productTemplate = (product) => {
     <img src=${product.imageUrl} alt="example1" />
     <h3 class="title">${product.name}</h3>
     <p class="description">${product.description}</p>
-    <a class="details-btn" href="/dashboard/details/:productId">More Info</a>
+    <a class="details-btn" href="/dashboard/details/${product._id}">More Info</a>
   </div>`;
 };
 

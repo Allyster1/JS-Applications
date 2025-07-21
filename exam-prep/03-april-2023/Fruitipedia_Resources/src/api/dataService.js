@@ -12,6 +12,10 @@ export async function createProduct(name, imageUrl, description, nutrition) {
   return api.post("/data/fruits", { name, imageUrl, description, nutrition });
 }
 
+export async function deleteProduct(productId) {
+  return api.del("/data/fruits/" + productId);
+}
+
 export async function updateProduct(productId, productData) {
   return api.put("/data/fruits/" + productId, productData);
 }
