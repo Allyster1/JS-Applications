@@ -2,7 +2,7 @@ const { chromium } = require("playwright-chromium");
 const { expect } = require("chai");
 
 const host = "http://localhost:3000"; // Application host (NOT service host - that can be anything)
-const interval = 500;
+const interval = 400;
 const timeout = 6000;
 const DEBUG = false;
 const slowMo = 500;
@@ -220,16 +220,16 @@ describe("E2E tests", function () {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      expect(await page.isVisible("text=Looking for the best beauty products?")).to.be.true;
+      expect(await page.isVisible("text=Looking for the best beauty products?"))
+        .to.be.true;
     });
 
     it("Show home page [ 2.5 Points ]", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      expect(
-        await page.isVisible("text=You are in the right place!")
-      ).to.be.true;
+      expect(await page.isVisible("text=You are in the right place!")).to.be
+        .true;
     });
   });
 
@@ -252,10 +252,8 @@ describe("E2E tests", function () {
       await page.click("nav >> text=Products");
       await page.waitForTimeout(interval);
 
-     
       expect(await page.isVisible("text=Products")).to.be.true;
       expect(await page.isVisible("text=No products yet.")).to.be.true;
-      
     });
 
     it("Check products page with 2 offers [ 2.5 Points ]", async () => {
@@ -399,9 +397,8 @@ describe("E2E tests", function () {
         "#details-wrapper p #categories",
         (t) => t.map((s) => s.textContent)
       );
-      const price = await page.$$eval(
-        "#details-wrapper p #price-number",
-        (t) => t.map((s) => s.textContent)
+      const price = await page.$$eval("#details-wrapper p #price-number", (t) =>
+        t.map((s) => s.textContent)
       );
       const description = await page.$$eval(
         "#details-wrapper #info-wrapper #details-description span",
@@ -726,10 +723,7 @@ describe("E2E tests", function () {
       total(6);
       await page.waitForTimeout(interval);
 
-      const [request] = await Promise.all([
-        onRequest,
-        page.click("#buy-btn"),
-      ]);
+      const [request] = await Promise.all([onRequest, page.click("#buy-btn")]);
 
       await page.waitForTimeout(interval);
 
@@ -768,9 +762,7 @@ describe("E2E tests", function () {
       await page.click(`.product:has-text("${data.name}") >> .details-btn`);
       await page.waitForTimeout(interval);
 
-      let buys = await page.$$eval("#buys", (t) =>
-        t.map((s) => s.textContent)
-      );
+      let buys = await page.$$eval("#buys", (t) => t.map((s) => s.textContent));
       expect(buys[0]).to.contains("5");
       own(1);
       total(6);
@@ -783,9 +775,7 @@ describe("E2E tests", function () {
 
       await page.waitForTimeout(interval);
 
-      buys = await page.$$eval("#buys", (t) =>
-        t.map((s) => s.textContent)
-      );
+      buys = await page.$$eval("#buys", (t) => t.map((s) => s.textContent));
       expect(buys[0]).to.contains("6");
       await page.waitForTimeout(interval);
     });
