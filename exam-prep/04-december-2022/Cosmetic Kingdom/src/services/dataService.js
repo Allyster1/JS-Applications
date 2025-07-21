@@ -47,3 +47,21 @@ export async function updateProduct(
     price,
   });
 }
+
+export async function buyProduct(id) {
+  return api.post(endpoints.bought, { productId: id });
+}
+
+export async function getTotalBought(productId) {
+  return api.get(
+    endpoints.bought +
+      `?where=productId%3D%22${productId}%22&distinct=_ownerId&count`
+  );
+}
+
+export async function userTotalBought(productId, userId) {
+  return api.get(
+    endpoints.bought +
+      `?where=productId%3D%22${productId}%22%20and%20_ownerId%3D%22${userId}%22&count`
+  );
+}

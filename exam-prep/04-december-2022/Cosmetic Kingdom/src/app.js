@@ -6,6 +6,7 @@ import { updateNav } from "./services/userUtility.js";
 
 import { homeView } from "./views/home.js";
 import { loginView, registerView, logoutHandler } from "./views/auth.js";
+
 import { dashboardView } from "./views/dashboard.js";
 import { createView } from "./views/create.js";
 import { editView } from "./views/edit.js";
