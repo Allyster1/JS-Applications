@@ -1,39 +1,59 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-const detailsTemplate = () => html` <section id="details">
+import { getProductById, deleteProduct } from "../services/dataService.js";
+import { getUserData } from "../services/userUtility.js";
+
+const detailsTemplate = (data, isOwner, onDelete) => html` <section
+  id="details"
+>
   <div id="details-wrapper">
-    <img id="details-img" src="./images/product example 1.png" alt="example1" />
-    <p id="details-title">Fond De Teint</p>
+    <img id="details-img" src="${data.imageUrl}" alt="example1" />
+    <p id="details-title">${data.name}</p>
     <p id="details-category">
-      Category: <span id="categories">Skin care, Makeup</span>
+      Category: <span id="categories">${data.category}</span>
     </p>
-    <p id="details-price">Price: <span id="price-number">23.99</span>$</p>
+    <p id="details-price">
+      Price: <span id="price-number">${data.price}</span>$
+    </p>
     <div id="info-wrapper">
       <div id="details-description">
         <h4>Bought: <span id="buys">0</span> times.</h4>
-        <span
-          >Fond De Teint (Foundation) is a liquid, cream, or powder makeup
-          applied to the face and neck to create an even, uniform color to the
-          complexion, cover flaws and, sometimes, to change the natural skin
-          tone. Some foundations also function as a moisturizer, sunscreen,
-          astringent or base layer for more complex cosmetics. Foundation
-          applied to the body is generally referred to as "body painting" or
-          "body makeup".</span
-        >
+        <span>${data.description}</span>
       </div>
     </div>
 
-    <!--Edit and Delete are only for creator-->
-    <div id="action-buttons">
-      <a href="" id="edit-btn">Edit</a>
-      <a href="" id="delete-btn">Delete</a>
-
-      <!--Bonus - Only for logged-in users ( not authors )-->
-      <a href="" id="buy-btn">Buy</a>
-    </div>
+    ${isOwner
+      ? html` <div id="action-buttons">
+          <a href="/edit/${data._id}" id="edit-btn">Edit</a>
+          <a href="/delete/${data._id}" @click=${onDelete} id="delete-btn"
+            >Delete</a
+          >
+          <a href="" id="buy-btn">Buy</a>
+        </div>`
+      : null}
   </div>
 </section>`;
 
-export function detailsView(ctx) {
-  ctx.render(detailsTemplate());
+export async function detailsView(ctx) {
+  const productId = ctx.params.id;
+
+  async function onDelete(e) {
+    e.preventDefault();
+    const confirmed = confirm("Are you sure?");
+    if (confirmed) {
+      await deleteProduct(productId);
+      ctx.page.redirect("/dashboard");
+    }
+  }
+
+  try {
+    const userData = getUserData();
+    const product = await getProductById(productId);
+
+    const isOwner = userData && userData._id == product._ownerId;
+
+    return ctx.render(detailsTemplate(product, isOwner, onDelete));
+  } catch (error) {
+    return alert(error.message);
+  }
 }

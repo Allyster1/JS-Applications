@@ -1,8 +1,8 @@
 import page from "../node_modules/page/page.mjs";
 
 import addRender from "./middlewares/render.js";
-import { updateNav } from "./services/userUtility.js";
 import { hasUser } from "./middlewares/guard.js";
+import { updateNav } from "./services/userUtility.js";
 
 import { homeView } from "./views/home.js";
 import { loginView, registerView, logoutHandler } from "./views/auth.js";

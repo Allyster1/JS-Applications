@@ -22,6 +22,6 @@ export async function dashboardView(ctx) {
     const products = await getAllProducts();
     ctx.render(dashboardTemplate(products));
   } catch (error) {
-    alert(error.message);
+    return alert(error.message);
   }
 }
