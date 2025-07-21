@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
-    <script type="module" src=""></script>
+    <script type="module" src="/src/app.js"></script>
     <title>Cosmetic Products</title>
   </head>
   <body>
@@ -18,19 +18,19 @@
 
         <nav>
           <div>
-            <a href="#">Products</a>
+            <a href="/dashboard">Products</a>
           </div>
 
           <!-- Logged-in users -->
           <div class="user">
-            <a href="#">Add Product</a>
-            <a href="#">Logout</a>
+            <a href="/create">Add Product</a>
+            <a href="/logout">Logout</a>
           </div>
 
           <!-- Guest users -->
           <div class="guest">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
           </div>
         </nav>
       </header>
