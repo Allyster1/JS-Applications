@@ -34,3 +34,16 @@ export async function createProduct(
 export async function deleteProduct(id) {
   return api.del(endpoints.byId + id);
 }
+
+export async function updateProduct(
+  id,
+  { name, imageUrl, category, description, price }
+) {
+  return api.put(endpoints.byId + id, {
+    name,
+    imageUrl,
+    category,
+    description,
+    price,
+  });
+}
