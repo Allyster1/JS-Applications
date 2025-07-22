@@ -1,4 +1,4 @@
-import { getUserData } from "./userUtility";
+import { getUserData } from "./userUtility.js";
 
 const host = "http://localhost:3030";
 
@@ -8,33 +8,33 @@ async function request(method, url, data) {
     headers: {},
   };
 
-  if (data) {
-    options.headers["Content-Type"] = "application/json";
-    options.body = JSON.stringify(data);
-  }
-
   const userData = getUserData();
 
   if (userData) {
     options.headers["X-Authorization"] = userData.accessToken;
   }
 
+  if (data !== undefined) {
+    options.headers["Content-Type"] = "application/json";
+    options.body = JSON.stringify(data);
+  }
+
   try {
-    const response = fetch(host + url, options);
+    const response = await fetch(host + url, options);
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Request failed");
+    }
 
     if (response.status === 204) {
       return response;
     }
 
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.message);
-    }
-
-    return result;
+    return response.json();
   } catch (error) {
-    alert(error.message);
+    alert(error);
+    throw error;
   }
 }
 

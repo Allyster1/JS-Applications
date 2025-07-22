@@ -1,7 +1,9 @@
 let userData = null;
 
 export function saveUserData(userData) {
-  sessionStorage.setItem("userData", JSON.stringify(userData));
+  if (userData !== undefined && userData !== null) {
+    sessionStorage.setItem("userData", JSON.stringify(userData));
+  }
 }
 
 export function getUserData() {
@@ -14,13 +16,18 @@ export function clearUserData() {
 }
 
 export function updateNav() {
-  userData = JSON.parse(sessionStorage.getItem("userData"));
+  const data = sessionStorage.getItem("userData");
+  if (data && data !== "undefined") {
+    userData = JSON.parse(data);
+  } else {
+    userData = null;
+  }
 
   if (userData) {
-    document.getElementById("user").style.display = "flex";
+    document.getElementById("user").style.display = "inline-block";
     document.getElementById("guest").style.display = "none";
   } else {
     document.getElementById("user").style.display = "none";
-    document.getElementById("guest").style.display = "flex";
+    document.getElementById("guest").style.display = "inline-block";
   }
 }
