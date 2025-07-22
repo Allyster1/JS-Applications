@@ -68,8 +68,7 @@ export async function editView(ctx) {
     const price = formData.get("price").trim();
 
     if (!name || !imageUrl || !category || !description || !price) {
-      alert("All fields are required.");
-      return;
+      return alert("All fields are required.");
     }
 
     try {

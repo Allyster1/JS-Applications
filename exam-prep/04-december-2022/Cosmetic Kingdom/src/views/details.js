@@ -58,15 +58,23 @@ export async function detailsView(ctx) {
     e.preventDefault();
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
-      await deleteProduct(productId);
-      ctx.page.redirect("/dashboard");
+      try {
+        await deleteProduct(productId);
+        ctx.page.redirect("/dashboard");
+      } catch (error) {
+        return alert(error.message);
+      }
     }
   }
 
   async function onBuy(e) {
     e.preventDefault();
-    await buyProduct(productId);
-    ctx.page.redirect(`/details/${productId}`);
+    try {
+      await buyProduct(productId);
+      ctx.page.redirect(`/details/${productId}`);
+    } catch (error) {
+      return alert(error.message);
+    }
   }
 
   try {

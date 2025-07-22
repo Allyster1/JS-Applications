@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Kaushan+Script&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Kaushan+Script&display=swap'); */
 
 body {
   color: rgb(231, 103, 124);
@@ -8,8 +7,8 @@ body {
   padding: 0;
   overflow: auto;
   width: 97vw;
-  font-family: 'Alkalami', serif;
-font-family: 'Kaushan Script', cursive;
+  font-family: "Alkalami", serif;
+  font-family: "Kaushan Script", cursive;
 }
 
 header {
@@ -18,7 +17,7 @@ header {
   align-items: center;
   padding: 0.3em 3em;
   background: rgb(245, 219, 223);
-  border-bottom: 3px dotted  rgb(231, 103, 124);
+  border-bottom: 3px dotted rgb(231, 103, 124);
   width: 90vw;
 }
 
@@ -27,7 +26,6 @@ nav {
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
-  
 }
 
 #home {
@@ -54,7 +52,7 @@ nav a:hover {
 
 footer {
   background-color: #e0ecf1;
-  color:  rgb(240, 14, 52);
+  color: rgb(240, 14, 52);
   font-weight: bolder;
   text-align: center;
   position: fixed;
@@ -64,10 +62,8 @@ footer {
   height: 28px;
 }
 footer p {
-  margin-top:-1px;
+  margin-top: -1px;
 }
-
-
 
 #home img {
   display: block;
@@ -81,6 +77,6 @@ footer p {
 #home h3 {
   font-style: italic;
   font-size: 27px;
-  color: rgb(240, 14, 52);;
+  color: rgb(240, 14, 52);
   text-align: center;
 }
