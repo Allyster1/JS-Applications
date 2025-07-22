@@ -1,5 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { getAllProducts } from "../services/dataService.js";
+import { dataServices } from "../services/dataService.js";
 
 const dashboardTemplate = (products) => html`
   <h2>Products</h2>
@@ -19,7 +19,7 @@ const productTemplate = (data) => html`
 
 export async function dashboardView(ctx) {
   try {
-    const products = await getAllProducts();
+    const products = await dataServices.getAllProducts();
     ctx.render(dashboardTemplate(products));
   } catch (error) {
     return alert(error.message);

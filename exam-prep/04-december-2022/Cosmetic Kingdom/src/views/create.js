@@ -1,5 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { createProduct } from "../services/dataService.js";
+import { dataServices } from "../services/dataService.js";
 
 const createTemplate = (onCreate) => html`
   <section id="create">
@@ -59,7 +59,13 @@ export function createView(ctx) {
     }
 
     try {
-      await createProduct(name, imageUrl, category, description, price);
+      await dataServices.createProduct(
+        name,
+        imageUrl,
+        category,
+        description,
+        price
+      );
       ctx.page.redirect("/dashboard");
     } catch (error) {
       return alert(error.message);

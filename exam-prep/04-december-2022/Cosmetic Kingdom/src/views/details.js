@@ -1,12 +1,6 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-import {
-  getProductById,
-  deleteProduct,
-  buyProduct,
-  getTotalBought,
-  userTotalBought,
-} from "../services/dataService.js";
+import { dataServices } from "../services/dataService.js";
 import { getUserData } from "../services/userUtility.js";
 
 const detailsTemplate = (
@@ -59,7 +53,7 @@ export async function detailsView(ctx) {
     const confirmed = confirm("Are you sure?");
     if (confirmed) {
       try {
-        await deleteProduct(productId);
+        await dataServices.deleteProduct(productId);
         ctx.page.redirect("/dashboard");
       } catch (error) {
         return alert(error.message);
@@ -70,7 +64,7 @@ export async function detailsView(ctx) {
   async function onBuy(e) {
     e.preventDefault();
     try {
-      await buyProduct(productId);
+      await dataServices.buyProduct(productId);
       ctx.page.redirect(`/details/${productId}`);
     } catch (error) {
       return alert(error.message);
@@ -79,13 +73,16 @@ export async function detailsView(ctx) {
 
   try {
     const userData = getUserData();
-    const product = await getProductById(productId);
-    const totalBought = await getTotalBought(productId);
+    const product = await dataServices.getProductById(productId);
+    const totalBought = await dataServices.getTotalBought(productId);
     let canBuy = false;
     let isOwner = false;
     if (userData) {
       isOwner = userData._id == product._ownerId;
-      const userBought = await userTotalBought(productId, userData._id);
+      const userBought = await dataServices.userTotalBought(
+        productId,
+        userData._id
+      );
       canBuy = !isOwner && userBought == 0;
     }
     return ctx.render(

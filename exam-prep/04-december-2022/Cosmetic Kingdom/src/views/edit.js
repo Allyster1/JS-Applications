@@ -1,5 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { getProductById, updateProduct } from "../services/dataService.js";
+import { dataServices } from "../services/dataService.js";
 import { updateNav } from "../services/userUtility.js";
 
 const editTemplate = (product, onEdit) => html`<section id="edit">
@@ -50,7 +50,7 @@ const editTemplate = (product, onEdit) => html`<section id="edit">
 
 export async function editView(ctx) {
   const productId = ctx.params.id;
-  const product = await getProductById(productId);
+  const product = await dataServices.getProductById(productId);
 
   ctx.render(editTemplate(product, onEdit));
 
@@ -72,7 +72,7 @@ export async function editView(ctx) {
     }
 
     try {
-      await updateProduct(productId, {
+      await dataServices.updateProduct(productId, {
         name,
         imageUrl,
         category,
