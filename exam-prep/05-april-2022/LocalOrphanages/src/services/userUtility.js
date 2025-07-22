@@ -1,0 +1,26 @@
+let userData = null;
+
+export function saveUserData(userData) {
+  sessionStorage.setItem("userData", JSON.stringify(userData));
+}
+
+export function getUserData() {
+  return userData;
+}
+
+export function clearUserData() {
+  sessionStorage.removeItem("userData");
+  userData = null;
+}
+
+export function updateNav() {
+  userData = JSON.parse(sessionStorage.getItem("userData"));
+
+  if (userData) {
+    document.getElementById("user").style.display = "flex";
+    document.getElementById("guest").style.display = "none";
+  } else {
+    document.getElementById("user").style.display = "none";
+    document.getElementById("guest").style.display = "flex";
+  }
+}
