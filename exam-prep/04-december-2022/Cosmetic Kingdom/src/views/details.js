@@ -74,6 +74,7 @@ export async function detailsView(ctx) {
   try {
     const userData = getUserData();
     const product = await dataServices.getProductById(productId);
+
     const totalBought = await dataServices.getTotalBought(productId);
     let canBuy = false;
     let isOwner = false;
