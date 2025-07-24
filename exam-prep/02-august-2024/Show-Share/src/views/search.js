@@ -32,7 +32,7 @@ const searchTemplate = (movies, onSearch) => html` <section id="search">
 
 export async function showSearch(ctx) {
   const query = new URLSearchParams(ctx.querystring).get("query")?.trim();
-  const movies = query ? await search(query) : undefined;
+  const movies = query ? await search(query) : null;
 
   ctx.render(searchTemplate(movies, onSearch));
 

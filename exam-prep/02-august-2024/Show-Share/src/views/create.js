@@ -35,19 +35,17 @@ export async function showAddShow(ctx) {
 
     try {
       const formData = new FormData(event.target);
-      const newMovie = {
-        title: formData.get("title"),
-        imageUrl: formData.get("image-url"),
-        genre: formData.get("genre"),
-        country: formData.get("country"),
-        details: formData.get("details"),
-      };
+      const title = formData.get("title");
+      const imageUrl = formData.get("image-url");
+      const genre = formData.get("genre");
+      const country = formData.get("country");
+      const details = formData.get("details");
 
-      if (Object.values(newMovie).some((x) => !x)) {
+      if (!title || !imageUrl || !genre || !country || !details) {
         return alert("All fields are required!");
       }
 
-      await addMovie(newMovie);
+      await addMovie(title, imageUrl, genre, country, details);
       event.target.reset();
       ctx.page.redirect("/dashboard");
     } catch (error) {
