@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <script type="module" src="/src/app.js"></script>
+    <title>GamesPlay</title>
+  </head>
+
+  <body>
+    <div id="box">
+      <header>
+        <!-- Navigation -->
+        <h1><a class="home" href="/">GamesPlay</a></h1>
+        <nav>
+          <a href="/dashboard">All games</a>
+          <!-- Logged-in users -->
+          <div id="user">
+            <a class="userCreate" href="/create">Create Game</a>
+            <a class="userLogout" href="/logout">Logout</a>
+          </div>
+          <!-- Guest users -->
+          <div id="guest">
+            <a class="guestLogin" href="/login">Login</a>
+            <a class="guestRegister" href="/register">Register</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Main Content -->
+      <main id="main-content"></main>
+    </div>
+  </body>
+</html>
