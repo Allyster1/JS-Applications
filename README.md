@@ -18,5 +18,8 @@ In the course "JS Applications" students will learn what HTTP requests are and h
 * Setting up and configuring a Webpack environment from scratch
 * Using and analyzing common design patterns
 
+## 📜 Certificate
+![JS Applications](https://github.com/Allyster1/JS-Applications/issues/1#issue-3370127672) 
+
 ## 📚 Navigation
 > Previous course: [**`JS Advanced`**](https://github.com/Allyster1/Softuni_Advanced_Javascript)
