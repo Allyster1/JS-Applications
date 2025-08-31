@@ -19,7 +19,7 @@ In the course "JS Applications" students will learn what HTTP requests are and h
 * Using and analyzing common design patterns
 
 ## 📜 Certificate
-![JS Applications](https://github.com/Allyster1/JS-Applications/issues/1#issue-3370127672) 
+![JS Applications](https://github.com/user-attachments/assets/7ca35cd2-88ba-4d78-ab12-ef423e528319) 
 
 ## 📚 Navigation
 > Previous course: [**`JS Advanced`**](https://github.com/Allyster1/Softuni_Advanced_Javascript)
